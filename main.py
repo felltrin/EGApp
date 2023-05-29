@@ -1,7 +1,10 @@
-import ProcessGameState as pgs
+from ProcessGameState import ProcessGameState
+
 
 def main():
-    game_state = pgs.load_data()
+    pgs = ProcessGameState()
+    pgs.process_coord_boundary()
+    pgs.process_inventory_classes()
     print("this is awesome")
 
 
