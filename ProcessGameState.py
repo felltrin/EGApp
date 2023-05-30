@@ -51,5 +51,17 @@ class ProcessGameState:
             else:
                 self.inventory_class = self.inventory_class._append(json_objects, ignore_index=True)
 
-        # self.coord_processed.loc[(self.coord_processed['team'] == "Team2") & (self.coord_processed['side'] == "CT") ]
         self.weapon_classes = np.array(self.inventory_class['weapon_class'].values)
+
+
+    def print_the_data(self):
+        team_2_data_t = self.coord_processed.loc[
+            (self.coord_processed['team'] == "Team2") & (self.coord_processed['side'] == "T")]
+        team_2_data_ct = self.coord_processed.loc[
+            (self.coord_processed['team'] == "Team2") & (self.coord_processed['side'] == "CT")]
+        print("Values for team 2 ct side")
+        print(team_2_data_ct[['area_name', 'side']].head(10))
+        print("\n")
+        print("Values for team 2 t side")
+        print(team_2_data_t[['clock_time', 'seconds', 'side']].head(10))
+        print("\n")
