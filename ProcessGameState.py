@@ -39,11 +39,9 @@ class ProcessGameState:
             if self.is_within_quadrilateral(point, A, B, C, D):
                 self.coord_processed = self.coord_processed._append(row)
 
-            print(row[['x', 'y']])
-
 
     def process_inventory_classes(self):
-        for index, row in self.game_state.iterrows():
+        for index, row in self.coord_processed.iterrows():
             json_objects = []
             for dict in row['inventory']:
                 json_objects.append(dict)
@@ -53,27 +51,5 @@ class ProcessGameState:
             else:
                 self.inventory_class = self.inventory_class._append(json_objects, ignore_index=True)
 
-        self.weapon_classes = self.inventory_class['weapon_class'].values
-
-
-"""
-TO-DO: REMOVE ONCE FINISHED
-NOTES:
-X_LABEL, Y_LABEL, Z_LABEL = 'x', 'y', 'z'
-FIRST_INDICE, FIFTH_INDICE = 0, 5
-TENTH_INDEX = 10
-print(game_state[[X_LABEL, Y_LABEL, Z_LABEL]][FIRST_INDICE:TENTH_INDEX])
-print(game_state.loc[0])
-print(game_state['inventory'][0])
-inventory_curr = game_state['inventory'][0][0]
-print(inventory_curr)
-
-print(game_state['player'][0:100])
-print(game_state.loc[3])
-for index, row in game_state.iterrows():
-    print(index, row['inventory'])
-print(game_state['y'][0:5])
-print(game_state.columns)
-for getting the column of player 4
-game_state.loc[game_state['player'] == 'Player4']
-"""
+        # self.coord_processed.loc[(self.coord_processed['team'] == "Team2") & (self.coord_processed['side'] == "CT") ]
+        self.weapon_classes = np.array(self.inventory_class['weapon_class'].values)
